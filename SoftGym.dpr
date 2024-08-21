@@ -2,7 +2,9 @@ program SoftGym;
 
 uses
   Forms,
-  uPrincipal in 'uPrincipal.pas' {frmPrincipal};
+  FormPrincipal in 'FormPrincipal.pas' {frmPrincipal},
+  Router in 'Router.pas',
+  PageDashboard in 'PageDashboard.pas' {frmPageDashboard};
 
 {$R *.res}
 

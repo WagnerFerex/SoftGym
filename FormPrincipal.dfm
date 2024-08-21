@@ -936,6 +936,7 @@ object frmPrincipal: TfrmPrincipal
       Layout = blGlyphTop
       ParentFont = False
       ParentBiDiMode = False
+      OnClick = btnHomeClick
     end
   end
   object Panel2: TPanel
@@ -955,7 +956,7 @@ object frmPrincipal: TfrmPrincipal
       Height = 69
       Align = alTop
       BevelOuter = bvNone
-      Color = 15856113
+      Color = 16316664
       ParentBackground = False
       TabOrder = 0
       object Image7: TImage
@@ -1980,7 +1981,7 @@ object frmPrincipal: TfrmPrincipal
         Stretch = True
       end
       object Image1: TImage
-        Left = 25
+        Left = 23
         Top = 17
         Width = 31
         Height = 32
@@ -2052,14 +2053,14 @@ object frmPrincipal: TfrmPrincipal
       end
       object Edit1: TEdit
         Left = 88
-        Top = 24
-        Width = 449
-        Height = 22
+        Top = 22
+        Width = 561
+        Height = 24
         BiDiMode = bdLeftToRight
         Ctl3D = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentBiDiMode = False

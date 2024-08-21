@@ -1,4 +1,4 @@
-unit uPrincipal;
+unit FormPrincipal;
 
 interface
 
@@ -24,6 +24,7 @@ type
     Shape1: TShape;
     pnlRender: TPanel;
     btnHome: TSpeedButton;
+    procedure btnHomeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -36,12 +37,18 @@ var
 
 implementation
 
+uses Router;
+
 {$R *.dfm}
+
+procedure TfrmPrincipal.btnHomeClick(Sender: TObject);
+begin
+  TRouter.Render('PageDashboard', pnlRender);
+end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-//  btnAlunos.Glyph.LoadFromFile('C:\Users\wagner.vasconcelos\Downloads\user (2).png');
-// $00301300
+  btnHome.Click;
 end;
 
 end.

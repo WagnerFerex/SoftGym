@@ -38,8 +38,12 @@
 			<DelphiCompile Include="SoftGym.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="uPrincipal.pas">
+			<DCCReference Include="FormPrincipal.pas">
 				<Form>frmPrincipal</Form>
+			</DCCReference>
+			<DCCReference Include="Router.pas"/>
+			<DCCReference Include="PageDashboard.pas">
+				<Form>frmPageDashboard</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
