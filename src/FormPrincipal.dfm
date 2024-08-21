@@ -2,7 +2,7 @@ object frmPrincipal: TfrmPrincipal
   Left = 794
   Top = 108
   ActiveControl = Panel1
-  Caption = 'SoftGym | Seu Sismtema de Gest'#227'o para Acedemia'
+  Caption = 'SoftGym | Seu Sistema de Gest'#227'o para Academia'
   ClientHeight = 749
   ClientWidth = 1204
   Color = clBtnFace
@@ -13,6 +13,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -34,7 +35,7 @@ object frmPrincipal: TfrmPrincipal
       Align = alTop
       BiDiMode = bdRightToLeft
       GroupIndex = 1
-      Caption = 'TREINO'
+      Caption = 'AVALIA'#199#195'O'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -186,7 +187,7 @@ object frmPrincipal: TfrmPrincipal
       Align = alTop
       BiDiMode = bdRightToLeft
       GroupIndex = 1
-      Caption = 'CONFIG'
+      Caption = 'AJUSTES'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
