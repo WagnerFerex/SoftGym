@@ -25,8 +25,6 @@ object frmPageDashboard: TfrmPageDashboard
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 304
-    ExplicitHeight = 201
     object Label1: TLabel
       AlignWithMargins = True
       Left = 3

@@ -20,8 +20,10 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_ExeOutput>Win32/</DCC_ExeOutput>
+			<DCC_DcuOutput>Win32/</DCC_DcuOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
-			<DCC_DependencyCheckOutputName>SoftGym.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>Win32\SoftGym.exe</DCC_DependencyCheckOutputName>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
 			<DCC_Platform>x86</DCC_Platform>
 		</PropertyGroup>
@@ -38,11 +40,11 @@
 			<DelphiCompile Include="SoftGym.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="FormPrincipal.pas">
+			<DCCReference Include="src\FormPrincipal.pas">
 				<Form>frmPrincipal</Form>
 			</DCCReference>
-			<DCCReference Include="Router.pas"/>
-			<DCCReference Include="PageDashboard.pas">
+			<DCCReference Include="src\Router.pas"/>
+			<DCCReference Include="src\PageDashboard.pas">
 				<Form>frmPageDashboard</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
