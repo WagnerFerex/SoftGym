@@ -26,6 +26,7 @@ type
     btnHome: TSpeedButton;
     procedure btnHomeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnAlunosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +41,11 @@ implementation
 uses Router;
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.btnAlunosClick(Sender: TObject);
+begin
+  TRouter.Render('PageAlunos', pnlRender);
+end;
 
 procedure TfrmPrincipal.btnHomeClick(Sender: TObject);
 begin

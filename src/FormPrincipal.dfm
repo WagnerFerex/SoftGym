@@ -13,7 +13,6 @@ object frmPrincipal: TfrmPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  WindowState = wsMaximized
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -187,7 +186,7 @@ object frmPrincipal: TfrmPrincipal
       Align = alTop
       BiDiMode = bdRightToLeft
       GroupIndex = 1
-      Caption = 'AJUSTES'
+      Caption = 'SISTEMA'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -643,7 +642,7 @@ object frmPrincipal: TfrmPrincipal
       Align = alTop
       BiDiMode = bdRightToLeft
       GroupIndex = 1
-      Caption = 'CADASTRO'
+      Caption = 'ALUNOS'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -784,6 +783,7 @@ object frmPrincipal: TfrmPrincipal
       Layout = blGlyphTop
       ParentFont = False
       ParentBiDiMode = False
+      OnClick = btnAlunosClick
       ExplicitTop = 0
     end
     object btnHome: TSpeedButton
@@ -2057,6 +2057,7 @@ object frmPrincipal: TfrmPrincipal
         Top = 22
         Width = 561
         Height = 24
+        TabStop = False
         BiDiMode = bdLeftToRight
         Ctl3D = False
         Font.Charset = DEFAULT_CHARSET

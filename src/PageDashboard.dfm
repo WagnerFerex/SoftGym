@@ -14,8 +14,6 @@ object frmPageDashboard: TfrmPageDashboard
   Font.Style = []
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 320
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -40,9 +38,9 @@ object frmPageDashboard: TfrmPageDashboard
       AutoSize = False
       Caption = 'Bem Vindo ao SoftGym! O Melhor Sistema para Academias.'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5987163
+      Font.Color = 3815994
       Font.Height = -19
-      Font.Name = 'Segoe UI'
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = []
       ParentFont = False
       Layout = tlBottom
@@ -59,7 +57,7 @@ object frmPageDashboard: TfrmPageDashboard
       Margins.Right = 30
       Margins.Bottom = 0
       Align = alTop
-      Brush.Color = clGray
+      Brush.Color = clSilver
       Pen.Style = psClear
       ExplicitLeft = 0
       ExplicitTop = 41
@@ -80,13 +78,11 @@ object frmPageDashboard: TfrmPageDashboard
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 85
-      ExplicitHeight = 435
       object DBCtrlGrid1: TDBCtrlGrid
         Left = 0
         Top = 0
         Width = 669
-        Height = 374
+        Height = 375
         Align = alClient
         AllowDelete = False
         AllowInsert = False
@@ -99,7 +95,6 @@ object frmPageDashboard: TfrmPageDashboard
         ParentColor = False
         TabOrder = 0
         RowCount = 2
-        ExplicitWidth = 885
         object Panel3: TPanel
           AlignWithMargins = True
           Left = 10
@@ -115,10 +110,6 @@ object frmPageDashboard: TfrmPageDashboard
           Color = 16316664
           ParentBackground = False
           TabOrder = 0
-          ExplicitLeft = 96
-          ExplicitTop = 56
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           DesignSize = (
             143
             167)
@@ -155,8 +146,6 @@ object frmPageDashboard: TfrmPageDashboard
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 72
-            ExplicitWidth = 178
           end
           object DBEdit1: TDBEdit
             Left = 23
@@ -181,8 +170,6 @@ object frmPageDashboard: TfrmPageDashboard
             ParentColor = True
             ParentFont = False
             TabOrder = 1
-            ExplicitTop = 23
-            ExplicitWidth = 160
           end
         end
       end

@@ -47,6 +47,30 @@
 			<DCCReference Include="src\PageDashboard.pas">
 				<Form>frmPageDashboard</Form>
 			</DCCReference>
+			<DCCReference Include="src\ConnZeosLib.pas">
+				<Form>DMConnZeosLib</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<RcItem Include="assets\db\database.db3">
+				<ContainerId>ResourceItem</ContainerId>
+				<ResourceType>RCData</ResourceType>
+				<ResourceId>softgym_db</ResourceId>
+			</RcItem>
+			<RcItem Include="assets\dll\sqlite3.dll">
+				<ContainerId>ResourceItem</ContainerId>
+				<ResourceType>RCData</ResourceType>
+				<ResourceId>sqlite_dll</ResourceId>
+			</RcItem>
+			<RcItem Include="assets\dll\libeay32.dll">
+				<ContainerId>ResourceItem</ContainerId>
+				<ResourceType>RCData</ResourceType>
+				<ResourceId>libeay32_dll</ResourceId>
+			</RcItem>
+			<RcItem Include="assets\dll\ssleay32.dll">
+				<ContainerId>ResourceItem</ContainerId>
+				<ResourceType>RCData</ResourceType>
+				<ResourceId>ssleay32_dll</ResourceId>
+			</RcItem>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
