@@ -51,6 +51,10 @@
 				<Form>DMConnZeosLib</Form>
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
+			<DCCReference Include="src\PageAlunos.pas">
+				<Form>frmPageAlunos</Form>
+			</DCCReference>
+			<DCCReference Include="src\ApiCep.pas"/>
 			<RcItem Include="assets\db\database.db3">
 				<ContainerId>ResourceItem</ContainerId>
 				<ResourceType>RCData</ResourceType>
