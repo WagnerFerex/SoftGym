@@ -27,6 +27,7 @@ type
     procedure btnHomeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAlunosClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -50,6 +51,15 @@ end;
 procedure TfrmPrincipal.btnHomeClick(Sender: TObject);
 begin
   TRouter.Render('PageDashboard', pnlRender);
+end;
+
+procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if key= 13 then
+     Perform(WM_NEXTDLGCTL,0,0)
+  else if Key = 27 then
+     Perform(WM_NEXTDLGCTL,1,0)
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
