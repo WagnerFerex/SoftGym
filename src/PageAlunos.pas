@@ -1,4 +1,4 @@
-unit PageAlunos;
+ï»¿unit PageAlunos;
 
 interface
 
@@ -111,6 +111,8 @@ begin
       pcAluno.ActivePage := tsCrud;
     end;
   end;
+
+  Label2.Caption := Format('%d Registro(s) encontrado(s)', [dsrAlunos.DataSet.RecordCount]);
 end;
 
 procedure TfrmPageAlunos.edtPesquisaChange(Sender: TObject);
@@ -129,7 +131,7 @@ begin
   for i := 1 to Length(ATexto) do
   begin
     Caracter := ATexto[i];
-    if Caracter in ['0'..'9'] then
+    if CharInSet(Caracter, ['0'..'9']) then
       Result := Result + Caracter;
   end;
 end;
@@ -232,7 +234,7 @@ function isEmpty(AEdit: TDBEdit; AMsg: string): Boolean;
 begin
   if Trim(AEdit.Text) = '' then
   begin
-    Application.MessageBox(PWideChar(AMsg), 'Campo obrigatório!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWideChar(AMsg), 'Campo obrigatï¿½rio!', MB_OK + MB_ICONERROR);
     AEdit.Clear;
     AEdit.SetFocus;
     Exit(True);
@@ -248,30 +250,30 @@ var
   Digito: Integer;
   CPF: string;
 begin
-  // Remove caracteres não numéricos
+  // Remove caracteres nï¿½o numï¿½ricos
   CPF := StringReplace(Trim(AEdit.Text), '.', '', [rfReplaceAll]);
   CPF := StringReplace(CPF, '-', '', [rfReplaceAll]);
 
   if CPF = '' then
     Exit(True);
 
-  // Verifica se o CPF tem 11 dígitos
+  // Verifica se o CPF tem 11 dï¿½gitos
   if Length(CPF) <> 11 then
   begin
-    Application.MessageBox(PWideChar(AMsg), 'Campo inválido!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWideChar(AMsg), 'Campo invï¿½lido!', MB_OK + MB_ICONERROR);
     AEdit.SetFocus;
     Exit(False);
   end;
 
-  // Verifica se todos os dígitos são iguais (exemplo: 111.111.111-11)
+  // Verifica se todos os dï¿½gitos sï¿½o iguais (exemplo: 111.111.111-11)
   if (CPF = StringOfChar(CPF[1], 11)) then
   begin
-    Application.MessageBox(PWideChar(AMsg), 'Campo inválido!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWideChar(AMsg), 'Campo invï¿½lido!', MB_OK + MB_ICONERROR);
     AEdit.SetFocus;
     Exit(False);
   end;
 
-  // Validação do primeiro dígito verificador
+  // Validaï¿½ï¿½o do primeiro dï¿½gito verificador
   Soma := 0;
   j := 10;
   for i := 1 to 9 do
@@ -287,12 +289,12 @@ begin
 
   if StrToInt(CPF[10]) <> Digito then
   begin
-    Application.MessageBox(PWideChar(AMsg), 'Campo inválido!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWideChar(AMsg), 'Campo invï¿½lido!', MB_OK + MB_ICONERROR);
     AEdit.SetFocus;
     Exit(False);
   end;
 
-  // Validação do segundo dígito verificador
+  // Validaï¿½ï¿½o do segundo dï¿½gito verificador
   Soma := 0;
   j := 11;
   for i := 1 to 10 do
@@ -308,7 +310,7 @@ begin
 
   if StrToInt(CPF[11]) <> Digito then
   begin
-    Application.MessageBox(PWideChar(AMsg), 'Campo inválido!', MB_OK + MB_ICONERROR);
+    Application.MessageBox(PWideChar(AMsg), 'Campo invï¿½lido!', MB_OK + MB_ICONERROR);
     AEdit.SetFocus;
     Exit(False);
   end;
@@ -329,25 +331,10 @@ begin
     end;
 end;
 
-function DadoInvalido(AEdit: TDBEdit; AFlags: Array of TypeData; ALabel: String): Boolean;
-begin
-//  if MathArray(AFlags, tdRequired) then
-//  begin
-//    if Trim(AEdit.Text) = '' then
-//    begin
-//      Application.MessageBox(PWideChar(), 'Campo obrigatório!', MB_OK + MB_ICONERROR);
-//      AEdit.Clear;
-//      AEdit.SetFocus;
-//      Exit(True);
-//    end;
-//  end;
-
-end;
-
 procedure TfrmPageAlunos.btnSalvarClick(Sender: TObject);
 begin
-  if isEmpty(edtTelefone, 'Não informado nenhum valor para o campo telefone.')
-    or not isCpf(edtCPF, 'Não informado um valor válido para o campo CPF') then
+  if isEmpty(edtTelefone, 'Nï¿½o informado nenhum valor para o campo telefone.')
+    or not isCpf(edtCPF, 'Nï¿½o informado um valor vï¿½lido para o campo CPF') then
     Exit;
 
   dsrAlunos.DataSet.Post;
