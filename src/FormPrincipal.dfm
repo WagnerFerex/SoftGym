@@ -3,7 +3,7 @@ object frmPrincipal: TfrmPrincipal
   Top = 108
   ActiveControl = Panel1
   Caption = 'SoftGym | Seu Sistema de Gest'#227'o para Academia'
-  ClientHeight = 749
+  ClientHeight = 652
   ClientWidth = 1204
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,6 +14,7 @@ object frmPrincipal: TfrmPrincipal
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,7 +23,7 @@ object frmPrincipal: TfrmPrincipal
     Left = 0
     Top = 0
     Width = 88
-    Height = 749
+    Height = 652
     Align = alLeft
     BevelOuter = bvNone
     Color = 33023
@@ -797,7 +798,7 @@ object frmPrincipal: TfrmPrincipal
       BiDiMode = bdRightToLeft
       GroupIndex = 1
       Down = True
-      Caption = 'PRINCIPAL'
+      Caption = 'INICIAL'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -946,7 +947,7 @@ object frmPrincipal: TfrmPrincipal
     Left = 88
     Top = 0
     Width = 1116
-    Height = 749
+    Height = 652
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
@@ -1061,7 +1062,7 @@ object frmPrincipal: TfrmPrincipal
         ParentBackground = False
         ParentColor = True
         TabOrder = 0
-        object Label1: TLabel
+        object lblUsuario: TLabel
           Left = 11
           Top = 27
           Width = 128
@@ -1073,6 +1074,29 @@ object frmPrincipal: TfrmPrincipal
           Font.Name = 'Segoe UI Semibold'
           Font.Style = []
           ParentFont = False
+        end
+        object Image2: TImage
+          Left = 160
+          Top = 0
+          Width = 20
+          Height = 69
+          Align = alRight
+          Center = True
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+            00180806000000E0773DF8000000097048597300000EC300000EC301C76FA864
+            0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+            679BEE3C1A000000E74944415478DA6364A031601CB560D402EA5A101A1ACAC6
+            C1C191F0E3C78F65AB57AFFE428A4140BD3C40BD5140BD0B807A7F61B5202121
+            41E1EFDFBFB781CC1340859EC45A02357C3B9069C1CCCCACBA60C18207388328
+            262626989191713990799A9595D563DEBC799FF1191E1B1BCB0DA4B600B1EDFF
+            FFFF63972C59B21C6710916A0921C3715A408C25C4188ED702644B80069C6263
+            63F3845942ACE1042DC066C9EFDFBFFF116B38511680405C5C5C08D0309041C7
+            A14296404B23172D5AB486905EA2331A529C3011E372922D000160D8DB83E8C5
+            8B171F2456CF302B8B462D189E160000FB9882198FDF7DD00000000049454E44
+            AE426082}
+          Proportional = True
+          Stretch = True
         end
       end
       object Edit1: TEdit
@@ -1100,7 +1124,7 @@ object frmPrincipal: TfrmPrincipal
       Left = 0
       Top = 69
       Width = 1116
-      Height = 680
+      Height = 583
       Align = alClient
       BevelOuter = bvNone
       Color = clWhite

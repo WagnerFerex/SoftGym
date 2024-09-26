@@ -43,7 +43,10 @@
 			<DCCReference Include="src\FormPrincipal.pas">
 				<Form>frmPrincipal</Form>
 			</DCCReference>
-			<DCCReference Include="src\Router.pas"/>
+			<DCCReference Include="src\Infra\Router.pas"/>
+			<DCCReference Include="src\Infra\Thread.pas"/>
+			<DCCReference Include="src\Infra\Email.pas"/>
+			<DCCReference Include="src\Infra\Utils.pas"/>
 			<DCCReference Include="src\PageDashboard.pas">
 				<Form>frmPageDashboard</Form>
 			</DCCReference>
@@ -55,6 +58,11 @@
 				<Form>frmPageAlunos</Form>
 			</DCCReference>
 			<DCCReference Include="src\ApiCep.pas"/>
+			<DCCReference Include="src\FormLogin.pas">
+				<Form>frmLogin</Form>
+			</DCCReference>
+			<DCCReference Include="src\module\module.sistema.login.controller.pas"/>
+			<DCCReference Include="src\module\module.sistema.usuario.model.pas"/>
 			<RcItem Include="assets\db\database.db3">
 				<ContainerId>ResourceItem</ContainerId>
 				<ResourceType>RCData</ResourceType>

@@ -13,7 +13,7 @@ type
     Panel3: TPanel;
     Image7: TImage;
     Panel5: TPanel;
-    Label1: TLabel;
+    lblUsuario: TLabel;
     btnTreinos: TSpeedButton;
     btnConfiguracao: TSpeedButton;
     btnRelatorios: TSpeedButton;
@@ -24,10 +24,12 @@ type
     Shape1: TShape;
     pnlRender: TPanel;
     btnHome: TSpeedButton;
+    Image2: TImage;
     procedure btnHomeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAlunosClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,8 +41,7 @@ var
 
 implementation
 
-uses Router;
-
+uses Router, ConnZeosLib;
 {$R *.dfm}
 
 procedure TfrmPrincipal.btnAlunosClick(Sender: TObject);
@@ -56,15 +57,21 @@ end;
 procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-    if key= 13 then
-     Perform(WM_NEXTDLGCTL,0,0)
+  if Key = 13 then
+    Perform(WM_NEXTDLGCTL, 0, 0)
   else if Key = 27 then
-     Perform(WM_NEXTDLGCTL,1,0)
+    Perform(WM_NEXTDLGCTL, 1, 0)
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
+  lblUsuario.Caption := DMConnZeosLib.qryUsuarioNome.AsString;
   btnHome.Click;
+end;
+
+procedure TfrmPrincipal.Sair1Click(Sender: TObject);
+begin
+  Close;
 end;
 
 end.

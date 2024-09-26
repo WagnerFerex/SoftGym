@@ -49,12 +49,16 @@ end;
 
 class procedure TRouter.Render(AKey: String; ARender: TWinControl);
 begin
+   if not FList.ContainsKey(AKey) then
+      raise Exception.Create('Página não acessível. Tente atualizar a aplicação!');
+
   if (not Assigned(FForm)) or (FList.Items[AKey].ClassName <> FForm.ClassName) then
   begin
     if Assigned(FForm) then
       FreeAndNil(FForm);
 
     Application.CreateForm(FList.Items[AKey], FForm);
+    FForm.WindowState := wsMaximized;
     FForm.Parent := ARender;
     FForm.Show;
   end;

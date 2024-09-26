@@ -1,5 +1,7 @@
 object DMConnZeosLib: TDMConnZeosLib
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 422
   Width = 626
   object ConnSQlite: TZConnection
@@ -10,7 +12,6 @@ object DMConnZeosLib: TDMConnZeosLib
     BeforeConnect = ConnSqliteBeforeConnect
     DisableSavepoints = False
     Port = 0
-    Database = 'C:\Projetos\Delphi\SoftGym\db\database.db3'
     Protocol = 'sqlite'
     LibraryLocation = 'C:\Projetos\Delphi\sqlite\sqlite3.dll'
     Left = 40
@@ -134,6 +135,47 @@ object DMConnZeosLib: TDMConnZeosLib
     end
     object qryAlunoModificadoPor: TZInt64Field
       FieldName = 'ModificadoPor'
+    end
+  end
+  object qryUsuario: TZQuery
+    Connection = ConnSQlite
+    SQL.Strings = (
+      'SELECT *'
+      'FROM Usuario')
+    Params = <>
+    Left = 168
+    Top = 88
+    object qryUsuarioCodigoUsuario: TZInt64Field
+      FieldName = 'CodigoUsuario'
+      Required = True
+    end
+    object qryUsuarioNome: TZUnicodeCLobField
+      FieldName = 'Nome'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object qryUsuarioLogin: TZUnicodeCLobField
+      FieldName = 'Login'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object qryUsuarioSenha: TZUnicodeCLobField
+      FieldName = 'Senha'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object qryUsuarioEmail: TZUnicodeCLobField
+      FieldName = 'Email'
+      BlobType = ftWideMemo
+    end
+    object qryUsuarioAcesso: TZUnicodeCLobField
+      FieldName = 'Acesso'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object qryUsuarioAtivo: TZUnicodeCLobField
+      FieldName = 'Ativo'
+      BlobType = ftWideMemo
     end
   end
 end

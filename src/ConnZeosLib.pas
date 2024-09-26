@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, Provider, DBGrids, WideStrings,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
-  ZConnection, DB;
+  ZConnection, DB, IniFiles;
 
 type
   TDMConnZeosLib = class(TDataModule)
@@ -30,9 +30,19 @@ type
     qryAlunoInseridoPor: TZInt64Field;
     qryAlunoModificadoEm: TZDateTimeField;
     qryAlunoModificadoPor: TZInt64Field;
+    qryUsuario: TZQuery;
+    qryUsuarioCodigoUsuario: TZInt64Field;
+    qryUsuarioNome: TZUnicodeCLobField;
+    qryUsuarioLogin: TZUnicodeCLobField;
+    qryUsuarioSenha: TZUnicodeCLobField;
+    qryUsuarioEmail: TZUnicodeCLobField;
+    qryUsuarioAcesso: TZUnicodeCLobField;
+    qryUsuarioAtivo: TZUnicodeCLobField;
     procedure ConnSQliteBeforeConnect(Sender: TObject);
     procedure qryAlunoBeforePost(DataSet: TDataSet);
     procedure qryAlunoDataNascimentoSetText(Sender: TField; const Text: string);
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,6 +55,7 @@ type
 
 var
   DMConnZeosLib: TDMConnZeosLib;
+  IniFile: TIniFile;
 
 implementation
 
@@ -54,8 +65,6 @@ uses
   StrUtils, Dialogs, Types, Forms;
 
 procedure OrdernarDataSet(DataSet: TDataSet; FieldName: String);
-var
-  Indice: string;
 begin
 //  Conn ADO
 //  if (DataSet as TADODataSet).IndexFieldNames = FieldName then
@@ -110,6 +119,16 @@ procedure TDMConnZeosLib.ConnSQliteBeforeConnect(Sender: TObject);
 begin
   (Sender as TZConnection).Database := GetCurrentDir +'\database.db3';
   (Sender as TZConnection).LibraryLocation := GetCurrentDir +'\sqlite3.dll';
+end;
+
+procedure TDMConnZeosLib.DataModuleCreate(Sender: TObject);
+begin
+  IniFile := TIniFile.Create(ChangeFileExt(Application.ExeName,'.ini'));
+end;
+
+procedure TDMConnZeosLib.DataModuleDestroy(Sender: TObject);
+begin
+  IniFile.Free;
 end;
 
 procedure TDMConnZeosLib.qryAlunoBeforePost(DataSet: TDataSet);
