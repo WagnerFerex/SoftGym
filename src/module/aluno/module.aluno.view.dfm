@@ -14,8 +14,7 @@ object frmPageAlunos: TfrmPageAlunos
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  OnDestroy = FormDestroy
-  OnShow = FormShow
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 17
   object pcAluno: TPageControl
@@ -32,6 +31,10 @@ object frmPageAlunos: TfrmPageAlunos
     object tsList: TTabSheet
       Caption = 'tsList'
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         778
         533)
@@ -258,22 +261,6 @@ object frmPageAlunos: TfrmPageAlunos
         ParentFont = False
         OnClick = btnCancelarClick
         ExplicitLeft = 471
-      end
-      object btnSalvar: TSpeedButton
-        Left = 659
-        Top = 48
-        Width = 95
-        Height = 29
-        Anchors = [akTop, akRight]
-        Caption = '&Salvar'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = btnSalvarClick
-        ExplicitLeft = 567
       end
       object gbEndereco: TGroupBox
         Left = 40
@@ -529,7 +516,7 @@ object frmPageAlunos: TfrmPageAlunos
           DataField = 'Telefone'
           DataSource = dsrAlunos
           ParentColor = True
-          TabOrder = 3
+          TabOrder = 2
           OnChange = edtTelefoneChange
           OnClick = edtTelefoneClick
         end
@@ -541,17 +528,7 @@ object frmPageAlunos: TfrmPageAlunos
           Hint = '000.000.000-00'
           DataField = 'Cpf'
           DataSource = dsrAlunos
-          TabOrder = 4
-          OnClick = edtTelefoneClick
-        end
-        object edtDataNascimento: TDBEdit
-          Left = 457
-          Top = 40
-          Width = 200
-          Height = 25
-          DataField = 'DataNascimento'
-          DataSource = dsrAlunos
-          TabOrder = 2
+          TabOrder = 3
           OnClick = edtTelefoneClick
         end
         object edtEmail: TDBEdit
@@ -561,7 +538,17 @@ object frmPageAlunos: TfrmPageAlunos
           Height = 25
           DataField = 'Email'
           DataSource = dsrAlunos
+          TabOrder = 4
+        end
+        object edtDataNascimento: TMaskEdit
+          Left = 457
+          Top = 40
+          Width = 201
+          Height = 25
+          EditMask = '!99/99/9999;1;_'
+          MaxLength = 10
           TabOrder = 5
+          Text = '  /  /    '
         end
       end
       object gbObservacoes: TGroupBox
@@ -583,10 +570,21 @@ object frmPageAlunos: TfrmPageAlunos
           TabOrder = 0
         end
       end
+      object btnSalvar: TBitBtn
+        Left = 659
+        Top = 48
+        Width = 95
+        Height = 29
+        Anchors = [akTop, akRight]
+        Caption = '&Salvar'
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
+        TabOrder = 3
+        OnClick = btnSalvarClick
+      end
     end
   end
   object dsrAlunos: TDataSource
-    DataSet = DMConnZeosLib.qryAluno
     OnStateChange = dsrAlunosStateChange
     Left = 624
     Top = 24

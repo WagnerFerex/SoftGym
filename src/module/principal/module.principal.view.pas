@@ -1,10 +1,11 @@
-unit FormPrincipal;
+unit module.principal.view;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, pngimage, jpeg, Buttons;
+  Dialogs, ExtCtrls, StdCtrls, pngimage, jpeg, Buttons,
+  module.sessao.controller;
 
 type
   TfrmPrincipal = class(TForm)
@@ -32,6 +33,7 @@ type
     procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
+    FSessao: ISessaoController;
   public
     { Public declarations }
   end;
@@ -41,7 +43,8 @@ var
 
 implementation
 
-uses Router, ConnZeosLib;
+uses Router;
+
 {$R *.dfm}
 
 procedure TfrmPrincipal.btnAlunosClick(Sender: TObject);
@@ -65,7 +68,8 @@ end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-  lblUsuario.Caption := DMConnZeosLib.qryUsuarioNome.AsString;
+  FSessao := TSessaoController.New;
+  lblUsuario.Caption := FSessao.DataSet.FieldByName('Nome').AsString;
   btnHome.Click;
 end;
 

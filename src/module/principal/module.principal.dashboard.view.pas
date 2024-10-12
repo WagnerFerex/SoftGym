@@ -1,4 +1,4 @@
-unit PageDashboard;
+unit module.principal.dashboard.view;
 
 interface
 

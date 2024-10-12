@@ -1,9 +1,10 @@
-unit module.sistema.login.controller;
+unit module.sessao.controller;
 
 interface
 
 uses
   Windows,
+  DB,
   Forms,
   StrUtils,
   Controls,
@@ -11,12 +12,11 @@ uses
   IniFiles,
   Utils,
   SysUtils,
-  ConnZeosLib,
-  module.sistema.usuario.model;
+  module.sessao.service;
 
 
 type
-  ILoginController = interface
+  ISessaoController = interface
     ['{4EFE8C03-2139-48B5-8D5A-EAADD657705B}']
     procedure Entrar;
     procedure RecuperarSenha(Usuario: string);
@@ -26,19 +26,20 @@ type
     function Login: string; overload;
     function Senha: string; overload;
     function Lembrar: Boolean; overload;
+    function DataSet: TDataSet;
   end;
 
-  TUsuarioController = class(TInterfacedObject, ILoginController)
+  TSessaoController = class(TInterfacedObject, ISessaoController)
   private
     FIniFile: TIniFile;
-    FUsuarioModel: IUsuarioModel;
+    FService: ISessaoService;
     FLogin: string;
     FSenha: string;
     FLembrar: Boolean;
   public
     constructor Create;
     destructor Destroy; override;
-    class function New(): ILoginController;
+    class function New(): ISessaoController;
     procedure RecuperarSenha(Usuario: string);
     procedure Entrar;
     procedure Login(Value: string); overload;
@@ -47,67 +48,79 @@ type
     function Login: string; overload;
     function Senha: string; overload;
     function Lembrar: Boolean; overload;
+    function DataSet: TDataSet;
   end;
+
+var
+  FSingleton: ISessaoController;
 
 implementation
 
 { TLoginController }
 
-constructor TUsuarioController.Create;
+constructor TSessaoController.Create;
 begin
   FIniFile := TIniFile.Create(ChangeFileExt(Application.ExeName,'.ini'));
-  FUsuarioModel := TUsuarioModel.New;
+  FService := TSessaoService.Instance;
 
-  if IniFile.ReadBool('LOGIN', 'LEMBRAR', False) then
+  if FIniFile.ReadBool('LOGIN', 'LEMBRAR', False) then
   begin
-    FLembrar := IniFile.ReadBool('LOGIN', 'LEMBRAR', False);
-    FLogin := IniFile.ReadString('LOGIN', 'USUARIO', '');
-    FSenha := IniFile.ReadString('LOGIN', 'SENHA', '');
+    FLembrar := FIniFile.ReadBool('LOGIN', 'LEMBRAR', False);
+    FLogin := FIniFile.ReadString('LOGIN', 'USUARIO', '');
+    FSenha := FIniFile.ReadString('LOGIN', 'SENHA', '');
   end;
 end;
 
-destructor TUsuarioController.Destroy;
+function TSessaoController.DataSet: TDataSet;
+begin
+  Result := FService.DataSet;
+end;
+
+destructor TSessaoController.Destroy;
 begin
   FIniFile.Free;
   inherited;
 end;
 
-procedure TUsuarioController.Entrar;
+procedure TSessaoController.Entrar;
 begin
-  FUsuarioModel.Autenticar(FLogin, FSenha);
+  FService.Autenticar(FLogin, FSenha);
 
-  IniFile.WriteString('LOGIN', 'USUARIO', ifThen(FLembrar, FLogin));
-  IniFile.WriteString('LOGIN', 'SENHA', ifThen(FLembrar, FSenha));
-  IniFile.WriteBool('LOGIN', 'LEMBRAR', FLembrar);
+  FIniFile.WriteString('LOGIN', 'USUARIO', ifThen(FLembrar, FLogin));
+  FIniFile.WriteString('LOGIN', 'SENHA', ifThen(FLembrar, FSenha));
+  FIniFile.WriteBool('LOGIN', 'LEMBRAR', FLembrar);
   Sleep(2000);
 end;
 
-procedure TUsuarioController.Lembrar(Value: Boolean);
+procedure TSessaoController.Lembrar(Value: Boolean);
 begin
   FLembrar := Value;
 end;
 
-function TUsuarioController.Lembrar: Boolean;
+function TSessaoController.Lembrar: Boolean;
 begin
   Result := FLembrar;
 end;
 
-function TUsuarioController.Login: string;
+function TSessaoController.Login: string;
 begin
   Result := FLogin;
 end;
 
-procedure TUsuarioController.Login(Value: string);
+procedure TSessaoController.Login(Value: string);
 begin
   FLogin := Value;
 end;
 
-class function TUsuarioController.New: ILoginController;
+class function TSessaoController.New: ISessaoController;
 begin
-  Result := Self.Create;
+  if not Assigned(FSingleton) then
+    FSingleton := TSessaoController.Create;
+
+  Result := FSingleton;
 end;
 
-procedure TUsuarioController.RecuperarSenha(Usuario: string);
+procedure TSessaoController.RecuperarSenha(Usuario: string);
 begin
   if Application.MessageBox(
     'Deseja receber uma nova senha de acesso por e-mail?',
@@ -117,16 +130,7 @@ begin
     Exit;
   end;
 
-  try
-
-  except on E: Exception do
-    begin
-      Application.MessageBox(
-        PChar('Falha ao enviar email para teste@teste.com. Msg: '+ E.Message),
-        'SoftGym | Recuperar senha',
-        MB_OK + MB_ICONERROR)
-    end;
-  end;
+  FService.RecuperarSenha(Usuario);
 
   Application.MessageBox(
     'Email enviado com sucesso para teste@teste.com',
@@ -134,12 +138,12 @@ begin
     MB_OK + MB_ICONEXCLAMATION)
 end;
 
-function TUsuarioController.Senha: string;
+function TSessaoController.Senha: string;
 begin
   Result := FSenha;
 end;
 
-procedure TUsuarioController.Senha(Value: string);
+procedure TSessaoController.Senha(Value: string);
 begin
   FSenha := Value;
 end;

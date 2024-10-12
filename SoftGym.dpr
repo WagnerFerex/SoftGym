@@ -1,33 +1,37 @@
 program SoftGym;
 
-
-
-{$R *.dres}
-
 uses
   Forms,
   Controls,
-  FormPrincipal in 'src\FormPrincipal.pas' {frmPrincipal},
-  Router in 'src\Infra\Router.pas',
-  Thread in 'src\Infra\Thread.pas',
-  Email in 'src\Infra\Email.pas',
-  Utils in 'src\Infra\Utils.pas',
-  PageDashboard in 'src\PageDashboard.pas' {frmPageDashboard},
-  ConnZeosLib in 'src\ConnZeosLib.pas' {DMConnZeosLib: TDataModule},
-  PageAlunos in 'src\PageAlunos.pas' {frmPageAlunos},
-  ApiCep in 'src\ApiCep.pas',
-  FormLogin in 'src\FormLogin.pas' {frmLogin},
-  module.sistema.login.controller in 'src\module\module.sistema.login.controller.pas',
-  module.sistema.usuario.model in 'src\module\module.sistema.usuario.model.pas';
+  module.principal.view in 'src\module\principal\module.principal.view.pas' {frmPrincipal},
+  Router in 'src\infra\Router.pas',
+  Thread in 'src\infra\Thread.pas',
+  Email in 'src\infra\Email.pas',
+  Utils in 'src\infra\Utils.pas',
+  module.principal.dashboard.view in 'src\module\principal\module.principal.dashboard.view.pas' {frmPageDashboard},
+  module.aluno.view in 'src\module\aluno\module.aluno.view.pas' {frmPageAlunos},
+  ApiCep in 'src\infra\ApiCep.pas',
+  module.sessao.login.view in 'src\module\sessao\module.sessao.login.view.pas' {frmLogin},
+  infra.component.persistence.connection in 'src\infra\infra.component.persistence.connection.pas' {DmZeosLib: TDataModule},
+  infra.component.persistence.dao in 'src\infra\infra.component.persistence.dao.pas',
+  module.sessao.controller in 'src\module\sessao\module.sessao.controller.pas',
+  module.sessao.service in 'src\module\sessao\module.sessao.service.pas',
+  module.aluno.controller in 'src\module\aluno\module.aluno.controller.pas',
+  module.aluno.service in 'src\module\aluno\module.aluno.service.pas',
+  module.aluno.repository in 'src\module\aluno\module.aluno.repository.pas',
+  module.aluno.entity in 'src\module\aluno\module.aluno.entity.pas',
+  infra.component.validator in 'src\infra\infra.component.validator.pas',
+  module.usuario.entity in 'src\module\usuario\module.usuario.entity.pas',
+  module.aluno.factory in 'src\module\aluno\module.aluno.factory.pas',
+  module.aluno.interfaces in 'src\module\aluno\module.aluno.interfaces.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  ExtractDataBase;
   Application.Title := 'SoftGym';
-  Application.CreateForm(TDMConnZeosLib, DMConnZeosLib);
+  Application.CreateForm(TDmZeosLib, DmZeosLib);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   if frmLogin.ShowModal <> mrCancel then Application.Run;

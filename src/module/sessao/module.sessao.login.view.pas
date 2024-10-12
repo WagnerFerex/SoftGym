@@ -1,4 +1,4 @@
-unit FormLogin;
+unit module.sessao.login.view;
 
 interface
 
@@ -14,7 +14,7 @@ uses
   Buttons,
   GIFImg,
   StrUtils,
-  module.sistema.login.controller;
+  module.sessao.controller;
 
 type
   TfrmLogin = class(TForm)
@@ -41,7 +41,7 @@ type
     procedure HabDesFormulario(Option: Boolean);
   private
     { Private declarations }
-    FController: ILoginController;
+    FController: ISessaoController;
   public
     { Public declarations }
   end;
@@ -51,7 +51,7 @@ var
 
 implementation
 
-uses ConnZeosLib, Thread;
+uses Thread;
 
 {$R *.dfm}
 
@@ -69,7 +69,10 @@ begin
 
       ModalResult := mrOK;
     except on E: Exception do
+    begin
+      HabDesFormulario(True);
       Application.MessageBox(PChar(E.Message), 'Dados login', MB_OK + MB_ICONEXCLAMATION);
+    end
     end;
   end).Start;
 end;
@@ -94,7 +97,7 @@ end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
-  FController := TUsuarioController.New;
+  FController := TSessaoController.New;
 
   edtUsuario.Text      := FController.Login;
   edtSenha.Text        := FController.Senha;

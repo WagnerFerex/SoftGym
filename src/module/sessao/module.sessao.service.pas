@@ -1,4 +1,4 @@
-unit module.sistema.usuario.model;
+unit module.sessao.service;
 
 interface
 
@@ -7,32 +7,36 @@ uses
   Utils,
   DB,
   ZDataset,
-  Email,
-  ConnZeosLib;
+  Email;
 
 type
-  IUsuarioModel = interface
+  ISessaoService = interface
     ['{4C061716-F9E1-48F5-9B3C-06C330455FD3}']
     procedure RecuperarSenha(ALogin: string);
     procedure Autenticar(ALogin, ASenha: string);
+    function DataSet: TDataSet;
   end;
 
-  TUsuarioModel = class(TInterfacedObject, IUsuarioModel)
+  TSessaoService = class(TInterfacedObject, ISessaoService)
   private
     FQuery: TZQuery;
+    class var FSessao: ISessaoService;
   public
     constructor Create;
     destructor Destroy; override;
-    class function New: IUsuarioModel;
+    class function Instance: ISessaoService;
     procedure RecuperarSenha(ALogin: string);
     procedure Autenticar(ALogin, ASenha: string);
+    function DataSet: TDataSet;
   end;
 
 implementation
 
-{ TUsuarioModel }
+uses infra.component.persistence.connection;
 
-procedure TUsuarioModel.Autenticar(ALogin, ASenha: string);
+{ TSessaoService }
+
+procedure TSessaoService.Autenticar(ALogin, ASenha: string);
 begin
   FQuery.Open;
 
@@ -42,53 +46,57 @@ begin
   if FQuery.FieldByName('Senha').AsString <> MD5(ASenha) then
     raise Exception.Create('Senha inválida, verifique e tente novamente.');
 
-  if DMConnZeosLib.qryUsuarioAtivo.Value <> 'S' then
+  if FQuery.FieldByName('Ativo').AsString <> 'S' then
     raise Exception.Create('Usuário inativo, verifique e tente novamente.');
 end;
 
-constructor TUsuarioModel.Create;
+constructor TSessaoService.Create;
 begin
-  FQuery := DMConnZeosLib.qryUsuario;
+  FQuery := TZQuery.Create(nil);
+  FQuery.Connection := TDmZeosLib.Instance;
+  FQuery.SQL.Text := 'SELECT * FROM USUARIO';
 end;
 
-destructor TUsuarioModel.Destroy;
+function TSessaoService.DataSet: TDataSet;
 begin
+  Result := FQuery;
+end;
+
+destructor TSessaoService.Destroy;
+begin
+   FreeAndNil(FQuery);
 
   inherited;
 end;
 
-class function TUsuarioModel.New: IUsuarioModel;
+class function TSessaoService.Instance: ISessaoService;
 begin
+  if not Assigned(FSessao) then
+    FSessao := TSessaoService.Create;
+
   Result := Self.Create;
 end;
 
-procedure TUsuarioModel.RecuperarSenha(ALogin: string);
+procedure TSessaoService.RecuperarSenha(ALogin: string);
 begin
+  FQuery.Open();
 
-//    EMail := TEmail.New();
-//    EMail
-////      .FromAddress(Email.)
+  if not FQuery.Locate('Login', ALogin, [loCaseInsensitive]) then
+    raise Exception.Create('Não foi possível localizar esse usuário, verifique e tente novamente!');
+
+//    TEmail.New()
 //      .FromName('SoftGym')
 //      .RecipientsAddress(AEmail)
 //      .Subject('SoftGym | Recuperação de Senha')
 //      .AddBody('Olá Sr(a)'+ ANome + ', ')
 //      .AddBody('')
 //      .AddBody('Você solicitou uma recuperação de senha SoftGym')
-//      .AddBody('Sua nova senha: 1234');
-//    EMail.Send();
+//      .AddBody('Sua nova senha: 1234')
+//    .Send();
 
-  //    EnviarEmailRecuperacaoSenha(
-//      qryUsuario.FieldByName('Nome').AsString,
-//      qryUsuario.FieldByName('Email').AsString
-//    );
-//
 //    qryUsuario.Edit;
 //    qryUsuario.FieldByName('Senha').Value := MD5('1234');
 //    qryUsuario.Post;
-
-
-  if not FQuery.Locate('Login', ALogin, [loCaseInsensitive]) then
-    raise Exception.Create('Não foi possível localizar esse usuário, verifique e tente novamente!');
 end;
 
 end.

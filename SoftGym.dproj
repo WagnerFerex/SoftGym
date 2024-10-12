@@ -40,49 +40,38 @@
 			<DelphiCompile Include="SoftGym.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="src\FormPrincipal.pas">
+			<DCCReference Include="src\module\principal\module.principal.view.pas">
 				<Form>frmPrincipal</Form>
 			</DCCReference>
-			<DCCReference Include="src\Infra\Router.pas"/>
-			<DCCReference Include="src\Infra\Thread.pas"/>
-			<DCCReference Include="src\Infra\Email.pas"/>
-			<DCCReference Include="src\Infra\Utils.pas"/>
-			<DCCReference Include="src\PageDashboard.pas">
+			<DCCReference Include="src\infra\Router.pas"/>
+			<DCCReference Include="src\infra\Thread.pas"/>
+			<DCCReference Include="src\infra\Email.pas"/>
+			<DCCReference Include="src\infra\Utils.pas"/>
+			<DCCReference Include="src\module\principal\module.principal.dashboard.view.pas">
 				<Form>frmPageDashboard</Form>
 			</DCCReference>
-			<DCCReference Include="src\ConnZeosLib.pas">
-				<Form>DMConnZeosLib</Form>
-				<DesignClass>TDataModule</DesignClass>
-			</DCCReference>
-			<DCCReference Include="src\PageAlunos.pas">
+			<DCCReference Include="src\module\aluno\module.aluno.view.pas">
 				<Form>frmPageAlunos</Form>
 			</DCCReference>
-			<DCCReference Include="src\ApiCep.pas"/>
-			<DCCReference Include="src\FormLogin.pas">
+			<DCCReference Include="src\infra\ApiCep.pas"/>
+			<DCCReference Include="src\module\sessao\module.sessao.login.view.pas">
 				<Form>frmLogin</Form>
 			</DCCReference>
-			<DCCReference Include="src\module\module.sistema.login.controller.pas"/>
-			<DCCReference Include="src\module\module.sistema.usuario.model.pas"/>
-			<RcItem Include="assets\db\database.db3">
-				<ContainerId>ResourceItem</ContainerId>
-				<ResourceType>RCData</ResourceType>
-				<ResourceId>softgym_db</ResourceId>
-			</RcItem>
-			<RcItem Include="assets\dll\sqlite3.dll">
-				<ContainerId>ResourceItem</ContainerId>
-				<ResourceType>RCData</ResourceType>
-				<ResourceId>sqlite_dll</ResourceId>
-			</RcItem>
-			<RcItem Include="assets\dll\libeay32.dll">
-				<ContainerId>ResourceItem</ContainerId>
-				<ResourceType>RCData</ResourceType>
-				<ResourceId>libeay32_dll</ResourceId>
-			</RcItem>
-			<RcItem Include="assets\dll\ssleay32.dll">
-				<ContainerId>ResourceItem</ContainerId>
-				<ResourceType>RCData</ResourceType>
-				<ResourceId>ssleay32_dll</ResourceId>
-			</RcItem>
+			<DCCReference Include="src\infra\infra.component.persistence.connection.pas">
+				<Form>DmZeosLib</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="src\infra\infra.component.persistence.dao.pas"/>
+			<DCCReference Include="src\module\sessao\module.sessao.controller.pas"/>
+			<DCCReference Include="src\module\sessao\module.sessao.service.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.controller.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.service.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.repository.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.entity.pas"/>
+			<DCCReference Include="src\infra\infra.component.validator.pas"/>
+			<DCCReference Include="src\module\usuario\module.usuario.entity.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.factory.pas"/>
+			<DCCReference Include="src\module\aluno\module.aluno.interfaces.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

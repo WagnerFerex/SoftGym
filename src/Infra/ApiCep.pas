@@ -76,11 +76,14 @@ begin
 
   json := TJSONObject.ParseJSONObject(JsonStr);
   try
-    Cep := ACep;
-    Logradouro := json.Get('logradouro').AsString;
-    Municipio := json.Get('localidade').AsString;
-    Bairro := json.Get('bairro').AsString;
-    Uf := json.Get('uf').AsString;
+    if Assigned(json.Get('logradouro')) then
+    begin
+      Cep := ACep;
+      Logradouro := json.Get('logradouro').AsString;
+      Municipio := json.Get('localidade').AsString;
+      Bairro := json.Get('bairro').AsString;
+      Uf := json.Get('uf').AsString;
+    end;
   finally
     json.Free;
   end;
